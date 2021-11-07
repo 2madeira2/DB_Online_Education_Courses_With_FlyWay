@@ -27,8 +27,9 @@ CREATE TABLE students
 
 CREATE TABLE courses
 (
-    id          SERIAL  NOT NULL,
-    name        VARCHAR NOT NULL,
+    id                            SERIAL  NOT NULL,
+    name                          VARCHAR NOT NULL,
+    description                   TEXT,
     required_knowledge_for_course TEXT,
     CONSTRAINT  courses_pk PRIMARY KEY (id)
 );
@@ -70,7 +71,7 @@ CREATE TABLE students_attendance
 CREATE TABLE homework_assignments
 (
     id SERIAL NOT NULL,
-    schedule_id INT NOT NULL REFERENCES courses_schedule (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    schedule_id INT NOT NULL UNIQUE REFERENCES courses_schedule (id) ON UPDATE CASCADE ON DELETE CASCADE,
     deadline TIMESTAMP,
     max_grade INT NOT NULL,
     num_attempts_to_pass INT NOT NULL DEFAULT 1,
